@@ -1,0 +1,42 @@
+#this script makes the directories for finalPush results
+
+#function definition
+
+mkAOADir()
+{
+    mkdir neg45
+    mkdir neg20
+    mkdir 0
+    mkdir 10
+    mkdir 20
+    mkdir 45
+    mkdir 90
+}
+
+mkReDir()
+{ 
+    #configure 300 directory
+    mkdir 300
+    cd 300
+    mkAOADir
+    cd ..
+
+    #configure 3000 directory
+    mkdir 3000
+    cd 3000
+    mkAOADir
+    cd ..
+
+}
+
+mkdir eagle
+mkdir naca2412
+mkdir plate
+
+for i in */ #eagle, plate, naca2412
+do
+    cd $i
+    mkReDir
+    cd ..
+done
+    

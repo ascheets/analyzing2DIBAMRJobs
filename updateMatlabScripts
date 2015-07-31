@@ -1,0 +1,54 @@
+#making sure all directories have correct scripts
+#will run script from matlab most likely
+
+for i in */ #eagle, plate, naca2412
+do
+    #don't need matlab scripts in some directories
+    if test $i = "zips/"
+	then
+	    continue
+    elif test $i = "analyzeFiles/"
+	then
+	    continue
+    else
+	cd $i
+    fi
+
+    for j in */ #300, 3000
+    do
+	cd $j
+	
+	#make plots dir
+	mkdir plots
+
+	#copy executedataread.m script
+	cp ../../analyzeFiles/dataReadTemplate.m ./dataReadTemplate.m
+
+	#copy dataReadTemplate.m
+	cp ../../analyzeFiles/executedataread.m ./executedataread.m
+
+	for k in */ #0, 10, ... , neg45
+	do
+	    
+	    cd $k
+	    
+	    #copy dataReadTemplate
+	    cp ../dataReadTemplate.m ./dataReadTemplate.m
+	    
+	    cd .. #step out of aoa dir
+
+	done
+
+	#remove script from plots dir
+	cd plots
+	rm dataReadTemplate.m
+	cd ..
+
+	cd .. #step out of Re dir
+
+    done
+
+    cd .. #step out of cross section dir
+
+done #finish main for loop
+

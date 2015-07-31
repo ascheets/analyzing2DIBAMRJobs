@@ -1,0 +1,67 @@
+for i in */ #eagle, naca, plate
+do
+    if test $i = "analyzeFiles/"
+	then
+	    continue
+    elif test  $i = "zips/"
+	then
+	    continue
+    else
+	cd $i
+    fi
+
+    for j in */ #300, 3000
+    do
+	cd $j
+	
+	for k in */ #0, 10, ... , neg45
+	do
+	    
+	    if test $k = "plots/"
+		then
+		    cd $k
+		    
+		    dirString="${i///}${j///}${k///}"
+		    
+		    echo $dirString
+		    
+		    zip -r $dirString.zip *
+		    
+		    mv $dirString.zip ../../../zips
+		    		    		    
+		    cd ..
+	    else
+		continue
+	    fi	    
+
+	done
+	
+	cd .. #step out of Re dir
+
+    done
+
+    cd .. #step out of cross section dir
+
+done #finish main for loop
+
+# for i in */
+# do
+#     if test $i = "analyzeFiles/"
+# 	then
+# 	    continue
+#     else
+# 	cd $i
+#     fi
+
+#     for j in */
+#     do
+# 	cd $j
+	
+	
+
+# 	cd ..
+#     done
+
+#     cd ..
+
+# done

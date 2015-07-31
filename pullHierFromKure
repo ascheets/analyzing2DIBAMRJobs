@@ -1,0 +1,26 @@
+#copying hier directories from kure
+
+#run this script outside of cross section dirs
+
+for i in */ #eagle, plate, naca2412...
+do
+    cd $i
+    for j in */ #300, 3000
+    do
+	cd $j
+	for k in */ #0, 10, ... , neg45
+	do
+	    cd $k
+	    
+	    #clear the directory
+	    rm -rf *
+	    
+	    #copy the hier dir
+	    scp -r ascheets@kure.unc.edu:/netscr/ascheets/finalPush/$i/$j/$k/hier_data_IB2d ./hier_data_IB2d
+	    
+	    cd .. #step out of aoa dir
+	done
+	cd .. #step out of re dir
+    done
+    cd .. #step out of cross section dir
+done
